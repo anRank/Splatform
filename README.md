@@ -1,2 +1,2 @@
 # Splatform
-论坛交流系统
+基于Flask的论坛交流系统
