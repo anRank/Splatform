@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from app import login_manager
+from models.base import db
 
 
 class User(db.Model):
@@ -11,25 +10,7 @@ class User(db.Model):
     tele = db.Column(db.String(11), nullable=False)
 
 
-class Article(db.Model):
-    __tablename__ = 'article'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    content = db.Column(db.String(200), nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    author = db.relationship('User', backref=db.backref('articles'))
-
-
-class Comment(db.Model):
-    __tablename__ = 'comment'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    content = db.Column(db.String(200), nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    author = db.relationship('User', backref=db.backref('comments'))
-    article_id = db.Column(db.Integer, db.ForeignKey('article.id'))
-    article = db.relationship('Article', backref=db.backref('comments'))
-
-
-class Test(db.Model):
-    __tablename__ = 'test'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    content = db.Column(db.String(200), nullable=False)
+# 需要提供一个user_loader回调。此回调用于从会话中存储的用户ID重新加载用户对象。它应该unicode带有用户的ID，并返回相应的用户对象:
+@login_manager.user_loader
+def get_user(uid):
+    return User.query.get(int(uid))

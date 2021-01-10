@@ -1,15 +1,13 @@
 from app.web import web
 from flask import request
-from models.user import Article, User, Comment
-from models.user import db
-
-
-@web.route('/')
-def hello_world():
-    return 'Hello World!'
+from models.content import Article, Comment
+from models.user import User
+from models.base import db
+from flask_login import login_required
 
 
 @web.route('/publish', methods=['GET', 'POST'])
+@login_required
 def publish():
     if request.method == 'GET':
         print('get')

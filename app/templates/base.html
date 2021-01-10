@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+{% block title %}
+    <title>Splatform</title>
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='static/css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='app/static/js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='app/static/js/jquery.min.js')}}"></script>
+{% endblock %}
+
+<body>
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+</body>
+
+</html>
