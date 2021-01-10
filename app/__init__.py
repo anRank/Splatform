@@ -24,10 +24,10 @@ def create_app():
 
     # 配置login_manager.init_app(app)
     login_manager.init_app(app)
-    # # 登录视图的名称可以设置为LoginManager.login_view
-    # login_manager.login_view = 'web.login'
-    # # 闪烁的默认消息是“要自定义消息”
-    # login_manager.login_message = '请先登录或注册'
-    with app.app_context():
-        db.create_all()
+    # 登录视图的名称可以设置为LoginManager.login_view
+    login_manager.login_view = 'web.login'
+    # 闪烁的默认消息是“要自定义消息”
+    login_manager.login_message = '请先登录或注册'
+    # with app.app_context():
+    #     db.create_all()
     return app

@@ -10,7 +10,7 @@ USERNAME = 'root'
 PASSWORD = '000220'
 HOST = '127.0.0.1'
 PORT = '3306'
-DATABASE = 'splatform2'
+DATABASE = 'splatform'
 
 # 连接mysql数据库
 SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(DIALECT, DRIVER, USERNAME, PASSWORD, HOST, PORT,
