@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+{% endblock %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<div id="app">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>{{ current_user.username }}</h3>
+                <img class="img-responsive" src="../../static/img/clannad.jpg">
+            </div>
+        </div>
+        <h3>链接</h3>
+        <p>描述文本。</p>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="#" v-on:click="SwitchTab(1)">我的发布</a></li>
+            <li><a href="#" v-on:click="SwitchTab(2)">我的评论</a></li>
+            <li><a href="#" v-on:click="SwitchTab(3)">个人设置</a></li>
+        </ul>
+        <hr class="hidden-sm hidden-md hidden-lg">
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div v-show="ok1">
+                    <p>我的发布</p>
+                    {% for post in posts %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div>
+                                    <span>{{ post.content }}</span>
+                                    <span style="float:right;"><a href="{{ url_for('web.post_detail', post_id=post.id) }}">详情</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div v-show="ok2">
+                    <p>我的评论</p>
+                    {% for reply in replies %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div>
+                                    <span>{{ reply.content }}</span>
+                                    <span style="float:right;"><a href="{{ url_for('web.post_detail', post_id=reply.post_id) }}">详情</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div v-show="ok3">
+                    个人设置
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    new Vue({
+        el: '#app',
+        delimiters: ['${', '}'],
+        data: {
+            ok1: true,
+            ok2: false,
+            ok3: false,
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            SwitchTab: function(tabid){
+                console.log(tabid)
+                if(tabid==1){
+                    this.ok1 = true;
+                    this.ok2 = false;
+                    this.ok3 = false;
+                }else if(tabid==2){
+                    this.ok1 = false;
+                    this.ok2 = true;
+                    this.ok3 = false;
+                }else if(tabid==3){
+                    this.ok1 = false;
+                    this.ok2 = false;
+                    this.ok3 = true;
+                }
+            }
+        }
+    })
+{% endblock %}

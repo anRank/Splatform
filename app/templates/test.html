@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+<body>
+{% block content %}
+    <div id="app">
+        <p>${ message }</p>
+    </div>
+    <p>dadawd</p>
+{% endblock %}
+
+
+{% block script %}
+    new Vue({
+        el: '#app',
+        delimiters: ['${', '}'],
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+
+        }
+    })
+{% endblock %}
+
+
+</body>
+</html>

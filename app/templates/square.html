@@ -23,7 +23,8 @@
                         <span style="float:right;">{{ post.create_time }}</span>
                     </div>
                     <div class="panel-body">
-                        {{ post.content }}
+                        <span>{{ post.content }}</span>
+                        <span style="float:right;"><a href="{{ url_for('web.post_detail', post_id=post.id) }}">详情</a></span>
                     </div>
                 </div>
             </li>
@@ -34,6 +35,6 @@
 </div>
 {% endblock %}
 
-{% block scripts %}
+{% block script %}
     {{ super() }}
 {% endblock %}
