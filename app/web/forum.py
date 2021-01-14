@@ -51,3 +51,21 @@ def reply_post(post_id):
     db.session.add(reply)
     db.session.commit()
     return redirect(url_for('web.post_detail', post_id=post_id))
+
+
+@web.route('/search_post', methods=['GET', 'POST'])
+def search_post():
+    if request.method == 'GET':
+        content = request.args.get('search')
+    else:
+            content = request.form.get('search')
+    print(11)
+    posts = Post.query.all()
+    result = []
+    for post in posts:
+        if content in post.content:
+            result.append(post)
+    context = {
+        'posts': result
+    }
+    return render_template('square.html', **context)
